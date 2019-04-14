@@ -1,0 +1,24 @@
+<section class="new-training" *ngIf="!isLoading; else load" fxLayout fxLayoutAlign="center">
+  <form (ngSubmit)="addTraining(f)" #f="ngForm">
+    <mat-card fxFlex="400px" fxFlex.xs="100%">
+      <mat-card-title fxLayoutAlign="center">Time to start a new training</mat-card-title>
+      <mat-card-content>
+        <mat-form-field fxLayoutAlign="center">
+          <mat-label>Excersies</mat-label>
+          <mat-select ngModel #ex="ngModel" name="exercise" required>
+            <mat-option *ngFor="let item of exercises" [value]="item.id">{{item.name}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="ex.hasError('required')">Choose atleast a training</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions fxLayoutAlign="center">
+        <button type="submit" class="btn btn-success" mat-raised-button [disabled]="f.invalid">Add</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</section>
+<ng-template  #load>
+  <section class="new-training" style="max-height:100%;" fxLayout fxLayoutAlign="center">
+    <mat-spinner></mat-spinner>
+  </section>
+</ng-template>
